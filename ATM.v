@@ -1,4 +1,4 @@
-//main module ;
+/* //main module ;
 module ATM ( select , origin_account_number , purpose_account_number , transfer_amount ,result, inventory_result );
 
 input wire[0:1] select ; 
@@ -47,7 +47,7 @@ input wire[0:9] withdraw_amount ;
 output reg[0:9]account_inventory;
 //  check the inventory of account_number by save_information module and subtractor module ;
 
-endmodule ;
+endmodule ; */
 
 
 
