@@ -1,0 +1,53 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "E:\Apps\iverilog\lib\ivl\system.vpi";
+:vpi_module "E:\Apps\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "E:\Apps\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "E:\Apps\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "E:\Apps\iverilog\lib\ivl\va_math.vpi";
+S_000001ac07957bf0 .scope module, "ATM_tb" "ATM_tb" 2 5;
+ .timescale -9 -9;
+v000001ac0795edd0_0 .var "a", 0 9;
+v000001ac079a6860_0 .var "b", 0 9;
+v000001ac079a6900_0 .net "result", 0 9, L_000001ac079a6b80;  1 drivers
+S_000001ac0795eba0 .scope module, "ins" "ten_bit_subtractor" 2 15, 3 1 0, S_000001ac07957bf0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 10 "input1";
+    .port_info 1 /INPUT 10 "input2";
+    .port_info 2 /OUTPUT 10 "answer";
+v000001ac079733a0_0 .net "answer", 0 9, L_000001ac079a6b80;  alias, 1 drivers
+v000001ac07959980_0 .net "input1", 0 9, v000001ac0795edd0_0;  1 drivers
+v000001ac0795ed30_0 .net "input2", 0 9, v000001ac079a6860_0;  1 drivers
+L_000001ac079a6b80 .arith/sub 10, v000001ac0795edd0_0, v000001ac079a6860_0;
+S_000001ac07957d80 .scope module, "ten_bit_adder" "ten_bit_adder" 4 1;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 10 "input1";
+    .port_info 1 /INPUT 10 "input2";
+    .port_info 2 /OUTPUT 10 "answer";
+v000001ac079a69a0_0 .net "answer", 0 9, L_000001ac079a6c20;  1 drivers
+o000001ac079a7128 .functor BUFZ 10, C4<zzzzzzzzzz>; HiZ drive
+v000001ac079a6a40_0 .net "input1", 0 9, o000001ac079a7128;  0 drivers
+o000001ac079a7158 .functor BUFZ 10, C4<zzzzzzzzzz>; HiZ drive
+v000001ac079a6ae0_0 .net "input2", 0 9, o000001ac079a7158;  0 drivers
+L_000001ac079a6c20 .arith/sum 10, o000001ac079a7128, o000001ac079a7158;
+    .scope S_000001ac07957bf0;
+T_0 ;
+    %vpi_call 2 19 "$dumpfile", "ATM_tb.vcd" {0 0 0};
+    %vpi_call 2 20 "$dumpvars", 32'sb00000000000000000000000000000000, S_000001ac07957bf0 {0 0 0};
+    %pushi/vec4 200, 0, 10;
+    %store/vec4 v000001ac0795edd0_0, 0, 10;
+    %pushi/vec4 100, 0, 10;
+    %store/vec4 v000001ac079a6860_0, 0, 10;
+    %delay 10, 0;
+    %vpi_call 2 24 "$display", "%d", v000001ac079a6900_0 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "ATM_tb.v";
+    "./ten_bit_subtractor.v";
+    "./ten_bit_adder.v";
