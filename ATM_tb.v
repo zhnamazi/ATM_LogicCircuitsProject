@@ -3,7 +3,7 @@
 `include "ten_bit_subtractor.v"
 
 module ATM_tb;
-
+    wire [0:3] i;
     reg [0:1] Select;
     reg [0:9] Balances [0:15];
     reg [0:3] AccountNumber_s, AccountNumber_d;
@@ -11,16 +11,20 @@ module ATM_tb;
     wire [0:9] Balance;
     wire [0:1] result;
 
-    ten_bit_subtractor ins(a, b, result);
+    //ten_bit_subtractor ins(a, b, result);
 
     initial begin
         
         $dumpfile("ATM_tb.vcd");
         $dumpvars(0, ATM_tb);
 
-        a=200 ;b = 100; #10;
+        $display("0:Khorooj  1:Mojodi  2:Bardasht  3:Enteghal");
 
-        $display("%d", result);
+        for(i=0;i<16;i++) begin
+            assign Balances[i] = 100;
+        end
+
+        //$display("%d", result);
     end
     
 
