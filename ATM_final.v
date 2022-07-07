@@ -1,5 +1,7 @@
 //main module ;
 // select:: 00 : display inventory  , 01 : withdraw  , 10 : deposite  , 11 : exite ; 
+// if successfully function : result == 01 .
+//
 
 module ATM ( select , origin_account_number , purpose_account_number , transfer_amount ,result, inventory_result );
 
@@ -13,8 +15,7 @@ output reg[0:9]inventory_result ;
 
 // array of registers of 15 person inventories ;
 reg[0:9]save_inventory[0:3];
-// array of registers of 15 person accoount number ; 
-reg[0:3] save_account_numbers[0:3];
+
 
 reg [0:9]  valid_transfer ; // valid amount of transfer money ; 
 initial begin 
