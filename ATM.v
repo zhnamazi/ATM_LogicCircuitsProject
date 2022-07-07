@@ -1,92 +1,82 @@
 //main module ;
 module ATM ( select , origin_account_number , purpose_account_number , transfer_amount ,result, inventory_result );
 
+// select:: 00 : display inventory  , 01 : withdraw  , 10 : deposite  , 11 : exite ;  
 input wire[0:1] select ; 
 input wire[0:3] origin_account_number ;
 input wire[0:9] transfer_amount ;
 input wire[0:3] purpose_account_number ;
 output reg[0:1] result ;
 output reg[0:9]inventory_result ;
-if(select == 00)begin
-// exite ;
-end
-else if(select ==01)begin 
-display_inventory(origin_account_number , inventory_result);
-end
-else if(select == 10) begin
-withdraw(origin_account_number , transfer_amount);
-end
-else if(select == 11)begin
-deposit(origin_account_number , purpose_account_number , transfer_amount);
-end
 
-endmodule;
+// array of registers of 15 person inventories ;
+reg[0:9]save_inventory[0:3];
+// array of registers of 15 person accoount number ; 
+reg[0:3] save_account_numbers[0:3];
 
+reg [0:9]  valid_transfer ; // valid amount of transfer money ; 
 
-//save module ;
-module save_informations();
-// 2d array array of account numbers and inventories ;
-// contain 15 cloumns and 2 rows ;
-reg [14:0] save_array [0:1];
-initial   begin
-for(int i = 0 ; i < 15 ; i++) begin
-for(int j = 0 ; j < 2 ; j++)  begin
-save_array[i][j] = i ;
-    end 
-  end 
-end
-endmodule;
+// assign default 
+assign save_inventory [0] = 9'b011010110;
+assign save_inventory [1] = 9'b111110110;
+assign save_inventory [2] = 9'b011101101;
+assign save_inventory [3] = 9'b001101101;
+assign save_inventory [4] = 9'b011111010;
+assign save_inventory [5] = 9'b011101010;
+assign save_inventory [6] = 9'b011010101;
+assign save_inventory [7] = 9'b111111000;
+assign save_inventory [8] = 9'b101010101;
+assign save_inventory [9] = 9'b011011101;
+assign save_inventory [10] = 9'b001001001;
+assign save_inventory [11] = 9'b110110110;
+assign save_inventory [12] = 9'b101010100;
+assign save_inventory [13] = 9'b100110110;
+assign save_inventory [14] = 9'b011001111;
+assign save_inventory [15] = 9'b001110111;
 
 
-// display inventory module ;
-module display_inventory(account_number , inventory);
-input wire [0:3] account_number ;
-output wire [0:9] inventory ;
-assign inventory = save_information[account_number][1];
-// assign the inventory of input account_number in inventory output ;
-// by call the save_information module ;
+initial begin
+//diaplay inventory ;
+if(select==00)begin
+assign inventory_result = save_inventory[origin_account_number];
+ assign result = 01 ;
+  end
 
-endmodule ;
-
-
-//deposit module
-module deposit(origin_account_number , purpose_account_number , transfer_amount1 );
-input wire[0:3] origin_account_number ;
-input wire[0:9] transfer_amount1 ;
-input wire[0:3] purpose_account_number ;
-
-
-//  check the inventory of origin_account_number by save_information module and subtractor module ;
- if(save_information[origin_account_number][1]>save_information[purpose_account_number][1])begin
-assign save_information[origin_account_number][1] = save_information[origin_account_number][1]+transfer_amount1
-endendmodule;
-else 
-  begin
+else if(select==01)begin
+// check for enough money ;
+if(transfer_amount<save_inventory[origin_account_number])begin 
+save_inventory[origin_account_number] =save_inventory[origin_account_number] - transfer_amount ;
+ assign result = 01 ;
 end
 
-//withdraw module ;
-module withdraw(account_number1 , withdraw_amount);
-input wire [0:3] account_number1 ;
-input wire[0:9] withdraw_amount ;
+else begin
+assign result = 00 ; 
+end
+end
+// withdraw
+else if(select==10) begin
+// check the enough inventory ;
+if(transfer_amount<save_inventory[origin_account_number])begin
 
-//  check the inventory of account_number by save_information module and subtractor module ;
-if(save_information[account_number1][1]>withdraw_amount)begin
+assign valid_transfer = save_inventory[purpose_account_number] ;
+if(valid_transfer<transfer_amount)begin 
 
-save_information[account_number1][1] = save_information[account_number1][1]-withdraw_amount 
+ save_inventory[purpose_account_number] = 2'b111111110 ;
+ save_inventory[origin_account_number] =save_inventory[origin_account_number] - valid_transfer;
+
+       end 
+else if(valid_transfer>transfer_amount)begin
+ save_inventory[purpose_account_number] = transfer_amount;
+ save_inventory[origin_account_number] =save_inventory[origin_account_number] - transfer_amount;
+end
+
+     end
+
+  end
+else begin 
+assign result = 00 ;
 end 
-else
-    begin
 end
 
-endmodule ;
-
-
-
-
-
-
-
-
-
-
-
+endmodule;
+ 
