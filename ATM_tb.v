@@ -9,7 +9,7 @@ module ATM_tb;
     wire [0:9] Balance;
     wire [0:1] result;
 
-    ATM ins(Select, Amount, AccountNumber_s, AccountNumber_d, result, Balance);
+    ATM_design ins(Select, Amount, AccountNumber_s, AccountNumber_d, result, Balance);
 
     initial begin
         

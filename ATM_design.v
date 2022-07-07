@@ -1,4 +1,4 @@
-module ATM (select, amount, accnumber_origin, accnumber_purpose, result, inventory);
+module ATM_design (select, amount, accnumber_origin, accnumber_purpose, result, inventory);
 
 input wire[0:1] select; 
 input wire[0:3] accnumber_origin;
