@@ -16,9 +16,6 @@ reg[0:3] save_account_numbers[0:3];
 
 reg [0:9]  valid_transfer ; // valid amount of transfer money ; 
 
-
-
-
 initial begin
 //diaplay inventory ;
 if(select==00)begin
