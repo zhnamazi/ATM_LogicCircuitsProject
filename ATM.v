@@ -16,23 +16,7 @@ reg[0:3] save_account_numbers[0:3];
 
 reg [0:9]  valid_transfer ; // valid amount of transfer money ; 
 
-// assign default 
-assign save_inventory [0] = 9'b011010110;
-assign save_inventory [1] = 9'b111110110;
-assign save_inventory [2] = 9'b011101101;
-assign save_inventory [3] = 9'b001101101;
-assign save_inventory [4] = 9'b011111010;
-assign save_inventory [5] = 9'b011101010;
-assign save_inventory [6] = 9'b011010101;
-assign save_inventory [7] = 9'b111111000;
-assign save_inventory [8] = 9'b101010101;
-assign save_inventory [9] = 9'b011011101;
-assign save_inventory [10] = 9'b001001001;
-assign save_inventory [11] = 9'b110110110;
-assign save_inventory [12] = 9'b101010100;
-assign save_inventory [13] = 9'b100110110;
-assign save_inventory [14] = 9'b011001111;
-assign save_inventory [15] = 9'b001110111;
+
 
 
 initial begin
@@ -74,7 +58,7 @@ end
 
   end
 else begin 
-assign result = 00 ;
+assign result = 00;
 end 
 end
 
