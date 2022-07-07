@@ -15,6 +15,26 @@ reg[0:9]save_inventory[0:3];
 reg[0:3] save_account_numbers[0:3];
 
 reg [0:9]  valid_transfer ; // valid amount of transfer money ; 
+initial begin 
+ save_inventory [4'b0000]  = 9'b0011010110;
+ save_inventory [4'b0001]  = 9'b0111110110;
+ save_inventory [4'b0010]  = 9'b0011101101;
+ save_inventory [4'b0011]  = 9'b0001101101;
+ save_inventory [4'b0100]  = 9'b0011111010;
+ save_inventory [4'b0101]  = 9'b0011101010;
+ save_inventory [4'b0110]  = 9'b0011010101;
+ save_inventory [4'b0111]  = 9'b0111111000;
+ save_inventory [4'b1000]  = 9'b0101010101;
+ save_inventory [4'b1001]  = 9'b0111101011;
+ save_inventory [4'b1010] = 9'b0001001001;
+ save_inventory [4'b1011] = 9'b0110110110;
+ save_inventory [4'b1100] = 9'b0101010100;
+ save_inventory [4'b1101] = 9'b0100110110;
+ save_inventory [4'b1110] = 9'b0111001111;
+ save_inventory [4'b1111] = 9'b0011101111;
+
+end
+$monitor(salam);
 
 initial begin
 //diaplay inventory ;
@@ -61,21 +81,3 @@ end
 
 endmodule;
  
-e_information[account_number1][1]-withdraw_amount 
-end 
-else
-    begin
-end
-
-endmodule ;
-
-
-
-
-
-
-
-
-
-
-
